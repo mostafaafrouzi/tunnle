@@ -1,0 +1,17 @@
+name: Freedom
+on: workflow_dispatch
+
+jobs:
+  run-firefox:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Start Firefox Docker
+        run: |
+          docker run -d --name firefox -p 5800:5800 --shm-size 2g jlesage/firefox
+
+      - name: 2. Create Tunnel (Wait for Link)
+        run: |
+          echo "========================================================"
+          echo "LINK RA DAR KHAT PAEEN PEYDA KONID:"
+          echo "========================================================"
+          ssh -o StrictHostKeyChecking=no -p 443 -R0:localhost:5800 a.pinggy.io
